@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="brand">SCIENTIFIC</div>
+        <div class="model">fx-41soukahras</div>
+        <div class="solar-panel"></div>
+        <div class="screen">
+            <div class="history"></div>
+            <div class="display" id="display">0</div>
+            <div class="mode-indicator">
+                <span>COMP</span>
+            </div>
+        </div>
+        <div class="tabs">
+            <button class="mode-btn active" data-tab="standard">Standard</button>
+            <button class="mode-btn" data-tab="graph">Graph</button>
+            <button class="mode-btn" data-tab="conversion">Base</button>
+            <button class="mode-btn" data-tab="logic">Logic</button>
+        </div>
+        <div class="tab-content active" id="standard">
+            <div class="buttons">
+                <button class="btn function" onclick="appendChar('(');">(</button>
+                <button class="btn function" onclick="appendChar(')');">)</button>
+                <button class="btn function" onclick="powerOn();">ON</button>
+                <button class="btn function" onclick="powerOff();">OFF</button>
+                <button class="btn clear" onclick="clearInput();">AC</button>
+                <button class="btn function" onclick="setOp('sin');">sin</button>
+                <button class="btn function" onclick="setOp('cos')">cos</button>
+                <button class="btn function" onclick="setOp('tan')">tan</button>
+                <button class="btn function" onclick="setOp('atan')">atan</button>
+                <button class="btn operator" onclick="div();">/</button>
+                <button class="btn function" onclick="setOp('√');">√</button>
+                <button class="btn number" onclick="test7();">7</button>
+                <button class="btn number" onclick="test8();">8</button>
+                <button class="btn number" onclick="test9();">9</button>
+                <button class="btn operator" onclick="mult();">*</button>
+                <button class="btn function" onclick="setOp('^');">^</button>
+                <button class="btn number" onclick="test4();">4</button>
+                <button class="btn number" onclick="test5();">5</button>
+                <button class="btn number" onclick="test6();">6</button>
+                <button class="btn operator" onclick="moin();">-</button>
+                <button class="btn function" onclick="setOp('log');">log</button>
+                <button class="btn number" onclick="test1();">1</button>
+                <button class="btn number" onclick="test2();">2</button>
+                <button class="btn number" onclick="test3();">3</button>
+                <button class="btn operator" onclick="plus();">+</button>
+                <button class="btn function" onclick="setOp('ln')">ln</button>
+                <button class="btn number" onclick="test0();">0</button>
+                <button class="btn number" onclick="testpoint();">.</button>
+                <button class="btn function" onclick="deleteLastChar();">DEL</button>
+                <button class="btn equals" onclick="egale();">=</button>
+            </div>
+        </div>
+        <div class="tab-content" id="graph">
+            <h3 class="tab-title">GRAPH MODE</h3>
+            <input type="text" class="graph-input" id="graphInput" placeholder="Enter function (e.g., sin(x), x^2)">
+            <div class="graph-container" id="graphCanvas">
+                <div class="axis x-axis"></div>
+                <div class="axis y-axis"></div>
+            </div>
+            <div class="buttons">
+                <button class="btn function" onclick="plotFunction();">Plot</button>
+                <button class="btn function" onclick="clearGraph();">Clear</button>
+                <button class="btn function" onclick="zoomGraph('in');">Zoom In</button>
+                <button class="btn function" onclick="zoomGraph('out');">Zoom Out</button>
+                <button class="btn equals" onclick="resetGraph();">Reset</button>
+            </div>
+        </div>
+        <div class="tab-content" id="conversion">
+            <h3 class="tab-title">BASE CONVERSION</h3>
+            <div class="base-conversion">
+                <select class="base-select" id="inputBase">
+                    <option value="dec">DEC</option>
+                    <option value="bin">BIN</option>
+                    <option value="oct">OCT</option>
+                    <option value="hex">HEX</option>
+                </select>
+                <select class="base-select" id="outputBase">
+                    <option value="dec">DEC</option>
+                    <option value="bin">BIN</option>
+                    <option value="oct">OCT</option>
+                    <option value="hex">HEX</option>
+                </select>
+            </div>
+            <div class="buttons">
+                <button class="btn number" onclick="appendBaseChar('7');">7</button>
+                <button class="btn number" onclick="appendBaseChar('8');">8</button>
+                <button class="btn number" onclick="appendBaseChar('9');">9</button>
+                <button class="btn base" onclick="appendBaseChar('A');">A</button>
+                <button class="btn clear" onclick="clearInput();">AC</button>
+                <button class="btn number" onclick="appendBaseChar('4');">4</button>
+                <button class="btn number" onclick="appendBaseChar('5');">5</button>
+                <button class="btn number" onclick="appendBaseChar('6');">6</button>
+                <button class="btn base" onclick="appendBaseChar('B');">B</button>
+                <button class="btn function" onclick="deleteLastChar();">DEL</button>
+                <button class="btn number" onclick="appendBaseChar('1');">1</button>
+                <button class="btn number" onclick="appendBaseChar('2');">2</button>
+                <button class="btn number" onclick="appendBaseChar('3');">3</button>
+                <button class="btn base" onclick="appendBaseChar('C');">C</button>
+                <button class="btn base" onclick="appendBaseChar('D');">D</button>
+                <button class="btn number" onclick="appendBaseChar('0');">0</button>
+                <button class="btn base" onclick="appendBaseChar('E');">E</button>
+                <button class="btn base" onclick="appendBaseChar('F');">F</button>
+                <button class="btn equals" onclick="convertBase();">Convert</button>
+                <button class="btn" style="visibility: hidden;"></button>
+            </div>
+        </div>
+        <div class="tab-content" id="logic">
+            <h3 class="tab-title">LOGIC OPERATIONS</h3>
+            <div class="buttons">
+                <button class="btn logic" onclick="setLogicOp('AND');">AND</button>
+                <button class="btn logic" onclick="setLogicOp('OR');">OR</button>
+                <button class="btn logic" onclick="setLogicOp('XOR');">XOR</button>
+                <button class="btn logic" onclick="setLogicOp('NOT');">NOT</button>
+                <button class="btn clear" onclick="clearInput();">AC</button>
+                <button class="btn number" onclick="appendLogicChar('1');">1</button>
+                <button class="btn number" onclick="appendLogicChar('0');">0</button>
+                <button class="btn function" onclick="deleteLastChar();">DEL</button>
+                <button class="btn equals" onclick="evaluateLogic();">=</button>
+                <button class="btn" style="visibility: hidden;"></button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"></script>
+    
+</body>
+</html>
